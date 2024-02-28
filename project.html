@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="website icon" href="https://img.icons8.com/?size=48&id=gbpBaAYdtBGK&format=png" type="png">
+    <style>
+      body{
+        margin: 0;
+        background-image: url('https://wallpapercave.com/wp/wp1828929.jpg');
+        background-size: cover;
+      }
+      #display{
+        display: none;
+        background: transparent;
+        border: 1px solid skyblue;
+        font-size: 18px;
+        font-weight: bold;
+        color: skyblue;
+        position: absolute;
+        top: 550px;
+        left: 200px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.5s,color 0.5s;
+      }
+      #display:hover{
+        border: 1px solid green;
+        color: white;
+        background-color: green; 
+      }
+      #display:active{
+        opacity: 0.5;
+      }
+      #mainDropdown{
+        margin-top: -10px;
+        margin-left: -8px;
+        padding: 10px;
+        outline: none;
+        border-radius: 20px;
+        display: inline;
+        cursor: pointer;
+        background: transparent;
+        border: 2px solid rgba(255,255,255,0.2);
+      }
+      #operationDropdown {
+        display: none;
+        border-radius: 20px;
+        padding: 10px;
+        outline: none;
+        position: absolute;
+        left:210px;
+        top: 320px;
+        cursor: pointer;
+        background: transparent;
+        border: 2px solid rgba(255,255,255,0.2);
+      }
+      #operationDropdown1 {
+        display: none;
+        border-radius: 20px;
+        padding: 10px;
+        outline: none;
+        position: absolute;
+        left:340px;
+        top: 320px;
+        cursor: pointer;
+        background: transparent;
+        border: 2px solid rgba(255,255,255,0.2);
+      }
+      .range{
+        width: 300px;
+        margin-top: -8px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        outline: none;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 20px;
+        background: transparent;
+        caret-color: #fff;
+        color: #fff;
+      }
+      .dropdown{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        outline: none;
+        border: 1px solid silver;
+      }
+      .centre{
+        margin-left: 313px;
+        margin-top: 70px;
+        width: fit-content;
+        padding: 50px;
+        padding-bottom: 150px;
+        border-radius: 100px;
+        background: transparent;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        backdrop-filter: blur(20px);
+      }
+      input[type="checkbox"]{ 
+        width: 30px;
+        height: 30px;
+        border-radius: 50px;
+        appearance: none;
+        border: 1px solid yellow;
+        margin-right: 30px;
+        cursor: pointer;
+      }
+      input[type="checkbox"]:checked{
+        background-color: gray;
+      }
+      b{
+        position: relative;
+        top: -8px;
+        font-size: larger;
+        color: #fff;
+      }
+      p{
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        color: #fff;
+      }
+      select{
+        color: white;
+      }
+      option{
+        color: white; 
+        background-color: rgba(39,38,39,255);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centre">
+      <b style="position: relative;top: -20px;left: 130px;font-size: 30px;color:coral;font-family: sans-serif;">Project ❤️‍🔥</b>
+      <label for="range"><p>Range of Denominator:</p></label>
+      <input type="text" id="range" class="range" autocomplete="off"> 
+
+      <label for="range"><p>Numerator:</p></label>
+      <input type="text" id="numerator" class="range" autocomplete="off"> 
+
+      <p>Select a Process:</p>
+        <select id="mainDropdown" onchange="showOperationDropdown()" oninput="check2()">
+        <option value="" disabled selected>Select an option</option>
+        <option value="even">Even</option>
+        <option value="odd">Odd</option>
+        <option value="prime">Prime</option>
+        <option value="positive">Positive</option>
+      </select><br>
+      
+      <select id="operationDropdown" onchange="showOperationDropdown1()" oninput="check2()">
+        <option value="" disabled selected>Inc / Dec</option>
+        <option value="increment">Increment</option>
+        <option value="decrement">Decrement</option>
+      </select><br>
+
+      <select id="operationDropdown1" oninput="check2()">
+        <option value="" disabled selected>Inc / Dec value by</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+
+      <p>Select 2 or more Operators:</p>
+      <form id="opt">
+        <label for="addCheckbox"><b>+</b></label>
+        <input type="checkbox" name="operator" value="+">
+        <label for="subtractCheckbox"><b>-</b></label>
+        <input type="checkbox" name="operator" value="-">
+        <label for="multiplyCheckbox"><b>*</b></label>
+        <input type="checkbox" name="operator" value="*">
+        <label for="divideCheckbox"><b>/</b></label>
+        <input type="checkbox" name="operator" value="/">
+        <label for="moduloCheckbox"><b>%</b></label>
+        <input type="checkbox" name="operator" value="%">
+      </form>
+
+      <input type="submit" id="display" onclick="buhaha()">
+    </div>
+
+    <script>
+      let a=document.getElementById('range');
+      let b=document.getElementById('numerator');
+      let c=document.getElementById('opt');
+      a.addEventListener('input',check);
+      b.addEventListener('input',check1);
+      c.addEventListener('change',checkSelected);
+      let z='';
+      let result='';
+      function check()
+      {
+        if(!isNaN(a.value) && a.value!='') a.style.boxShadow='0 0 5px green';  
+        else a.style.boxShadow='0 0 5px red';
+        displayButton()
+      }
+  
+      function check1()
+      {
+        if(!isNaN(b.value) && b.value!='') b.style.boxShadow='0 0 5px green';
+        else b.style.boxShadow='0 0 5px red';
+        displayButton()
+      }
+  
+      function check2()
+      {
+        if((mainDropdown.value=='positive') && operationDropdown.value!='' && operationDropdown1.value!='') mainDropdown.style.boxShadow='0 0 5px green';
+  
+        else if((mainDropdown.value=='even' || mainDropdown.value=='odd' || mainDropdown.value=='prime'))
+        {
+          mainDropdown.style.boxShadow='0 0 5px green';
+          operationDropdown.value='';
+          operationDropdown1.value='';
+        }
+        else mainDropdown.style.boxShadow='0 0 5px red';
+  
+        if(operationDropdown.value!='' && operationDropdown1.value!='') operationDropdown.style.boxShadow='0 0 5px green'
+        else operationDropdown.style.boxShadow='0 0 5px red'
+  
+        if(operationDropdown1.value!='') operationDropdown1.style.boxShadow='0 0 5px green'
+        else operationDropdown1.style.boxShadow='0 0 5px red'
+  
+        displayButton()
+      }
+  
+      function showOperationDropdown() 
+      {
+        if(mainDropdown.value=="positive") operationDropdown.style.display="block";
+        else 
+        {
+          operationDropdown.style.display="none";
+          operationDropdown1.style.display="none";
+        }
+      }
+  
+      function showOperationDropdown1() 
+      {
+        if(operationDropdown.value=="increment" || operationDropdown.value=="decrement") operationDropdown1.style.display="block";
+      }
+  
+      function checkSelected() 
+      {
+        z=''
+        for(let i=0;i<c.elements.length;i++) if(c.elements[i].checked && c.elements[i].type=='checkbox') z+=c.elements[i].value
+  
+        displayButton()
+      }
+  
+      function displayButton()
+      {
+        if(!isNaN(a.value) && b.value!='' && !isNaN(b.value) && a.value!='' && (mainDropdown.value=='even' || mainDropdown.value=='odd' || mainDropdown.value=='prime') && z.length>=2) display.style.display='block';
+  
+        else if(!isNaN(a.value) && b.value!='' && !isNaN(b.value) && a.value!='' && mainDropdown.value!='' && operationDropdown.value!='' && operationDropdown1.value!='' && z.length>=2) display.style.display='block';
+        
+        else display.style.display='none';
+      }
+  
+      function buhaha()
+      {
+        let v=parseInt(a.value);
+        let w=parseInt(b.value);
+        let x=mainDropdown.value;
+        let y=operationDropdown.value;
+        let m=parseInt(operationDropdown1.value);
+      
+        if(x=='even') even(v,w);
+        else if(x=='odd') odd(v,w);
+        else if(x=='prime') prime(v,w);
+        else if(x=='positive' && y=='increment') posInc(v,w,m);
+        else posDec(v,w,m);
+        result=result.substring(0,result.length-3);
+        localStorage.setItem("result",result);
+        window.location="projectredirect.html";
+      }
+  
+      function even(v,w)
+      {
+        result='';
+        let j=0;
+        for(i=2;i<=v;i+=2)
+        {
+          result+=w+'/'+i+' '+z[j]+' ';
+          j++;
+          if(j==z.length) j=0;
+        }
+      }
+  
+      function odd(v,w)
+      {
+        result='';
+        let j=0;
+        for(i=1;i<=v;i+=2)
+        {
+          result+=w+'/'+i+' '+z[j]+' ';
+          j++;
+          if(j==z.length) j=0;
+        }
+      }
+  
+      function prime(v,w)
+      {
+        result='';
+        let j=0;
+        for(let i=2;i<=v;i++)
+        {
+          if(isPrime(i))
+          {
+            result+=w+'/'+i+' '+z[j]+' ';
+            j++;
+          }
+          if(j==z.length) j=0;
+        }
+      }
+  
+      function isPrime(n)
+      {
+        for(let i=2;i<=n/2;i++)
+        {
+          if(n%i==0) return false;
+        }
+        return true;
+      }
+
+      function posInc(v,w,m)
+      {
+        result='';
+        let j=0;
+        for(let i=1;i<=v;i+=m)
+        {
+          result+=w+'/'+i+' '+z[j]+' ';
+          j++;
+          if(j==z.length) j=0;
+        }
+      }
+
+      function posDec(v,w,m)
+      {
+        result='';
+        let j=0;
+        for(let i=v;i>=1;i-=m)
+        {
+          result+=w+'/'+i+' '+z[j]+' ';
+          j++;
+          if(j==z.length) j=0;
+        }
+      }
+    </script>
+  </body>
+</html>

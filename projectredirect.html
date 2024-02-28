@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="website icon" href="https://img.icons8.com/?size=48&id=gbpBaAYdtBGK&format=png" type="png">
+    <style>
+      body{
+        margin: 0;
+        background-image: url('https://www.bhmpics.com/downloads/coding-minimalist-Wallpapers/6.4k_minimalist__html_css_code_style_wallpaper_by_colorsector_delksyr-fullview.jpg');
+        background-size: cover;
+      }
+      #result{  
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        letter-spacing: 3px;
+        border-radius: 10px;
+        width: 550px;
+        height: 510px;
+        padding: 30px;
+        overflow-y: auto;
+        text-align: justify;
+        background: transparent;
+        margin-left: 450px;
+        margin-top: 80px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 1);      
+		  }
+      button{
+        padding: 10px 15px;
+        margin-top: 35px;
+        margin-left: 470px;
+        border-radius: 10px;
+        background: transparent;
+        border: 1px solid #fff;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.5s,color 0.5s;
+      }
+      button:hover{
+        border: 1px solid green;
+        background-color: green; 
+      }  
+      button:active{
+        opacity: 0.5;
+      }
+      .bu{
+        padding: 10px 15px;
+        margin-top: 35px;
+        margin-left: 390px;
+        border-radius: 10px;
+        background: transparent;
+        border: 1px solid #fff;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.5s,color 0.5s;
+      }
+      .bu:hover{
+        border: 1px solid red;
+        background-color: red;
+      }
+      .bu:active{
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="result"></div>
+    <button onclick="goBack()">Continue</button>
+    <a href="https://c.tenor.com/TI8S7CGa8fAAAAAd/tenor.gif"><button class="bu">Exit</button></a>
+    <script>
+      let d=localStorage.getItem("result");
+      document.getElementById("result").innerText=d;
+      function goBack()
+      {
+        localStorage.removeItem("result");
+        location.href="project.html";
+      }
+    </script>
+  </body>
+</html>
